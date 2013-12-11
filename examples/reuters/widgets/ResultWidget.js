@@ -43,12 +43,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       $(this.target).append(this.template(doc));
 
       var items = [];
+      items = items.concat(this.facetLinks('topics', doc.topics));
+      items = items.concat(this.facetLinks('organisations', doc.organisations));
+      items = items.concat(this.facetLinks('exchanges', doc.exchanges));
 
-      items = items.concat(this.facetLinks('comment_id', doc.comment_id));
-      items = items.concat(this.facetLinks('comment_date', doc.comment_date));
-	items = items.concat(this.facetLinks('comment_content', doc.comment_content));
-
-      var $links = $('#links_' +doc.comment_id);
+      var $links = $('#links_' + doc.id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
         $links.append($('<li></li>').append(items[j]));
@@ -58,17 +57,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
   template: function (doc) {
     var snippet = '';
-    if (doc.comment_content.length > 300) {
-      snippet += 'DATE: '+doc.comment_date +'  USER:'+doc.comment_user_id +' '+ doc.comment_content.substring(0, 300);
-      snippet += '<span style="display:none;">' + doc.comment_content.substring(300);
+    if (doc.text.length > 300) {
+      snippet += doc.dateline + ' ' + doc.text.substring(0, 300);
+      snippet += '<span style="display:none;">' + doc.text.substring(300);
       snippet += '</span> <a href="#" class="more">more</a>';
     }
     else {
-      snippet += 'DATE: '+doc.comment_date +'  USER:'+doc.comment_user_id +' '+ doc.comment_content;
+      snippet += doc.dateline + ' ' + doc.text;
     }
 
-    var output = '<div><h2>' + 'ID: '+doc.comment_id + '</h2>';
-    output += '<p id="links_' + doc.comment_content + '" class="links"></p>';
+    var output = '<div><h2>' + doc.title + '</h2>';
+    output += '<p id="links_' + doc.id + '" class="links"></p>';
     output += '<p>' + snippet + '</p></div>';
     return output;
   },
@@ -93,4 +92,3 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 });
 
 })(jQuery);
-

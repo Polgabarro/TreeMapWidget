@@ -8,36 +8,9 @@
 				$(this.target).html('no items found in current selection');
 				return;
 			}else{
-
-				//extraccio de fields
-				var maxCount = 0;
-			    	var objectedItems = [];
-			    	for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
-			      		var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
-			      		if (count > maxCount) {
-						maxCount = count;
-			      		}
-			      		objectedItems.push({ facet: facet, count: count });
-			    	}
-			    	objectedItems.sort(function (a, b) {
-			      		return a.facet < b.facet ? -1 : 1;
-			    	});
 				
-				//construccio dels tags del tagcloud
-				$(this.target).empty();
-				for (var i = 0, l = objectedItems.length; i < l; i++) {
-					var facet = objectedItems[i].facet;
-			      		$(this.target).append(
-						$('<a href="#" class="treemap_item"></a>')
-							.text(facet)
-								.addClass('treemap_size_' + parseInt(objectedItems[i].count / maxCount * 10))
-									.click(this.clickHandler(facet))
-			      		);
-			    	}
 				
-				//codi treemap
-				/*
-                                var w = 960,
+                    var w = 960,
 				    h = 500,
 				    color = d3.scale.category20c();
 				
@@ -50,8 +23,24 @@
 				    .style("position", "relative")
 				    .style("width", w + "px")
 				    .style("height", h + "px");
+					
+				//objectedItems is my list of facets & counts
+				var maxCount = 0;
+				var objectedItems = [];
+				for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
+				  var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
+				  if (count > maxCount) {
+					maxCount = count;
+				  }
+				  objectedItems.push({ facet: facet, count: count });
+				}
+				//see print values
+				//document.write(objectedItems[1].facet); 
+				//document.write(objectedItems[1].count);
 				
-					//ara extreu de un json, el nostre objectiu es extreure dels facets (mirar lo de objecteditems)
+				
+				
+				/*
 				d3.json("../data/flare.json", function(json) {
 				  div.data([json]).selectAll("div")
 				      .data(treemap.nodes)
@@ -60,8 +49,8 @@
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .call(cell)
 				      .text(function(d) { return d.children ? null : d.name; });
-					//end
-
+					
+				
 				  d3.select("#size").on("click", function() {
 				    div.selectAll("div")
 					.data(treemap.value(function(d) { return d.size; }))
@@ -94,53 +83,9 @@
 				}
 				*/
 
-                        }
+          }
 		}
 	});
 
 })(jQuery);
 
-//backup
-/* 
-(function ($) {
-        
-	AjaxSolr.TreeMapWidget = AjaxSolr.AbstractFacetWidget.extend({
-		afterRequest: function () 
-		{
-	                
-			if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
-				$(this.target).html('no items found in current selection');
-				return;
-			}else{
-				
-                                ///codi tagcloud
-                                
-				var maxCount = 0;
-			    	var objectedItems = [];
-			    	for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
-			      		var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
-			      		if (count > maxCount) {
-						maxCount = count;
-			      		}
-			      		objectedItems.push({ facet: facet, count: count });
-			    	}
-			    	objectedItems.sort(function (a, b) {
-			      		return a.facet < b.facet ? -1 : 1;
-			    	});
-
-				$(this.target).empty();
-				for (var i = 0, l = objectedItems.length; i < l; i++) {
-					var facet = objectedItems[i].facet;
-			      		$(this.target).append(
-						$('<a href="#" class="treemap_item"></a>')
-							.text(facet)
-								.addClass('treemap_size_' + parseInt(objectedItems[i].count / maxCount * 10))
-									.click(this.clickHandler(facet))
-			      		);
-			    	}
-                        }
-		}
-	});
-
-})(jQuery);
-*/

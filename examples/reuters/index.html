@@ -18,10 +18,14 @@
   <script src="../../widgets/jquery/PagerWidget.js"></script>
   <script src="../../core/AbstractFacetWidget.js"></script>
   <script src="widgets/TagcloudWidget.js"></script>
+  
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="widgets/TreeMapWidget.js"></script>
+  
   <script src="widgets/CurrentSearchWidget.9.js"></script>
   <script src="../../core/AbstractTextWidget.js"></script>
   <script src="widgets/AutocompleteWidget.js"></script>
+  <script src="widgets/CountryCodeWidget.js"></script>
   <script src="widgets/CalendarWidget.js"></script>
 </head>
 <body>
@@ -51,13 +55,21 @@
         <input type="text" id="query" name="query" autocomplete="off">
       </ul>
 
-      <h2>Top ID</h2>
-      <div class="tagcloud" id="comment_id"></div>
+      <h2>Top Topics</h2>
+      <div class="tagcloud" id="topics"></div>
 
-      <h2>Top Karmas</h2>
-      <div class="tagcloud" id="comment_karma"></div>
+      <h2>Top Organisations</h2>
+      <div class="tagcloud" id="organisations"></div>
 
+      <h2>Top Exchanges</h2>
+      <div class="tagcloud" id="exchanges"></div>
+	  
+	  <h2>Treemap</h2>
+		  <div id="treemap_topics"></div>
 
+      <h2>By Country</h2>
+      <div id="countries"></div>
+      <div id="preview"></div>
 
       <h2>By Date</h2>
       <div id="calendar"></div>
