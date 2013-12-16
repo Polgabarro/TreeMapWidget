@@ -20,16 +20,35 @@
 				  if (count > maxCount) {
 					maxCount = count;
 				  }
-				  objectedItems.push({ facet: facet, count: count });
+				  objectedItems.push({ name: facet, size: count });
 				}
+				maxCount = 0;
+				var objectedItems2 = [];
+				for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
+				  var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
+				  if (count > maxCount) {
+					maxCount = count;
+				  }
+				  objectedItems2.push({ name: facet, children : [{name: facet, size: count}] });
+				}
+				
+
+				
 				//see print values
-				for(var i=0; i<objectedItems.length;i++){
+				/*for(var i=0; i<objectedItems.length;i++){
 					document.write(objectedItems[i].facet); 
 					document.write(",");
 					document.write(objectedItems[i].count);
 					document.write("\n");
-				}
+				}*/
 				
+				var joder= JSON.stringify(objectedItems2);
+				//document.write(joder);
+				
+				var joder2 = '{ "name" : "node" , "children" : ';
+				joder2 += joder;
+				joder2 += '}';
+				//document.write(joder2); 
 				
 				
 				var margin = {
@@ -50,8 +69,10 @@
 				    .style("height", (height + margin.top + margin.bottom) + "px")
 				    .style("left", margin.left + "px")
 				    .style("top", margin.top + "px");
+				
 
-				d3.json("flare.json", function(error, root) {
+				d3.json("", function(error, root) {
+					root=JSON.parse( joder2 );
 				  var node = div.datum(root).selectAll(".node")
 				      .data(treemap.nodes)
 				    .enter().append("div")
@@ -59,6 +80,7 @@
 				      .call(position)
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .text(function(d) { return d.children ? null : d.name; });
+					
 
 				  d3.selectAll("input").on("change", function change() {
 				    var value = this.value === "count"
