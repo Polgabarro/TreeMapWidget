@@ -103,7 +103,7 @@
 		  <div id="treemap_topics"></div>
 		
 				
-	<!--
+	
 
       <h2>By Country</h2>
       <div id="countries"></div>
@@ -116,7 +116,6 @@
     </div>
     <div class="clear"></div>
   </div>  
--->
 
 </body>
 </html>

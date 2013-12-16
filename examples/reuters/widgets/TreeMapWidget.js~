@@ -23,13 +23,12 @@
 				  objectedItems.push({ facet: facet, count: count });
 				}
 				//see print values
-				/*for(var i=0; i<objectedItems.length;i++){
+				for(var i=0; i<objectedItems.length;i++){
 					document.write(objectedItems[i].facet); 
 					document.write(",");
 					document.write(objectedItems[i].count);
 					document.write("\n");
 				}
-				*/
 				
 				
 				
