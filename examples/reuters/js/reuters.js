@@ -6,6 +6,7 @@ var Manager;
     Manager = new AjaxSolr.Manager({
       solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
     });
+	/*
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
       target: '#docs'
@@ -20,19 +21,28 @@ var Manager;
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
+	*/
     var fields = [ 'topics', 'organisations', 'exchanges' ];
+	/*
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.TagcloudWidget({
         id: fields[i],
         target: '#' + fields[i],
         field: fields[i]
       }));
-    }
+    }*/
 	Manager.addWidget(new AjaxSolr.TreeMapWidget({
         id: 'treemap_topics',
         target: '#' + 'topics',
         field: 'topics'
       }));
+    /*Manager.addWidget(new AjaxSolr.TreeMapWidget({
+        id: 'treemap_exchanges',
+        target: '#' + 'exchanges',
+        field: 'exchanges'
+      }));*/
+	
+	/*
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
       id: 'currentsearch',
       target: '#selection'
@@ -52,6 +62,7 @@ var Manager;
       target: '#calendar',
       field: 'date'
     }));
+	*/
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {

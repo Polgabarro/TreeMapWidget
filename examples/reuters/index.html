@@ -28,43 +28,7 @@
   <script src="widgets/CountryCodeWidget.js"></script>
   <script src="widgets/CalendarWidget.js"></script>
 </head>
-<body>
-<!--  <div id="wrap"> 
-    <div id="header">
-      <h1>AJAX Solr Demonstration</h1>
-      <h2>Browse Reuters business news from 1987</h2>
-    </div>
-
-    <div class="right">
-      <div id="result">
-        <div id="navigation">
-          <ul id="pager"></ul>
-          <div id="pager-header"></div>
-        </div>
-        <div id="docs"></div>
-      </div>
-    </div>
-
-    <div class="left">
-      <h2>Current Selection</h2>
-      <ul id="selection"></ul>
-	
-      <h2>Search</h2>
-      <span id="search_help">(press ESC to close suggestions)</span>
-      <ul id="search">
-        <input type="text" id="query" name="query" autocomplete="off">
-      </ul>
-
-      <h2>Top Topics</h2>
-      <div class="tagcloud" id="topics"></div>
-
-      <h2>Top Organisations</h2>
-      <div class="tagcloud" id="organisations"></div>
-
-      <h2>Top Exchanges</h2>
-      <div class="tagcloud" id="exchanges"></div>
-	  -->
-
+<body>				
 				<style>
 
 				body {
@@ -72,6 +36,9 @@
 				  margin: auto;
 				  position: relative;
 				  width: 960px;
+				  height: 500px;
+				  left: 0px;
+				  top: 0px;
 				}
 
 				form {
@@ -93,14 +60,14 @@
 				
 
 
-	  <h2>Treemap</h2>
-		
-		<form>
-		  <label><input type="radio" name="mode" value="size" checked> Size</label>
-		  <label><input type="radio" name="mode" value="count"> Count</label>
-		</form>
-		
-		  <div id="treemap_topics"></div>
+	  <h2>Treemaps</h2>
+		  <div>
+				<form>
+				  <label><input type="radio" name="mode" value="size" checked> Count</label>
+				  <label><input type="radio" name="mode" value="count"> Equal</label>
+				</form>
+		  </div>
+		  
 		
 				
 	<!--

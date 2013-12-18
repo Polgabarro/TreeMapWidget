@@ -9,20 +9,8 @@
 				return;
 			}else{
 				
-				
-                    		
-					
 				//objectedItems is my list of facets & counts
 				var maxCount = 0;
-				var objectedItems = [];
-				for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
-				  var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
-				  if (count > maxCount) {
-					maxCount = count;
-				  }
-				  objectedItems.push({ name: facet, size: count });
-				}
-				maxCount = 0;
 				var objectedItems2 = [];
 				for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
 				  var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
@@ -32,23 +20,18 @@
 				  objectedItems2.push({ name: facet, children : [{name: facet, size: count}] });
 				}
 				
-
-				
 				//see print values
-				/*for(var i=0; i<objectedItems.length;i++){
-					document.write(objectedItems[i].facet); 
+				/*for(var i=0; i<objectedItems2.length;i++){
+					document.write(objectedItems2[i].name); 
 					document.write(",");
-					document.write(objectedItems[i].count);
+					document.write(objectedItems2[i].children[0].size);
 					document.write("\n");
 				}*/
 				
-				var joder= JSON.stringify(objectedItems2);
-				//document.write(joder);
-				
-				var joder2 = '{ "name" : "node" , "children" : ';
-				joder2 += joder;
-				joder2 += '}';
-				//document.write(joder2); 
+				var json1= JSON.stringify(objectedItems2);
+				var json2 = '{ "name" : "node" , "children" : ';
+				json2 += json1;
+				json2 += '}';
 				
 				
 				var margin = {
@@ -72,7 +55,7 @@
 				
 				//"" is the path of the json, if gives error, it would use the root value
 				d3.json("", function(error, root) {
-					root=JSON.parse( joder2 );
+					root=JSON.parse( json2 );
 				  var node = div.datum(root).selectAll(".node")
 				      .data(treemap.nodes)
 				    .enter().append("div")
@@ -81,7 +64,7 @@
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .text(function(d) { return d.children ? null : d.name; });
 					
-
+					//changing input button
 				  d3.selectAll("input").on("change", function change() {
 				    var value = this.value === "count"
 					? function() { return 1; }
