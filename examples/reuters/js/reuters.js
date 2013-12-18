@@ -31,16 +31,20 @@ var Manager;
         field: fields[i]
       }));
     }*/
-	Manager.addWidget(new AjaxSolr.TreeMapWidget({
-        id: 'treemap_topics',
-        target: '#' + 'topics',
-        field: 'topics'
-      }));
-    /*Manager.addWidget(new AjaxSolr.TreeMapWidget({
-        id: 'treemap_exchanges',
-        target: '#' + 'exchanges',
-        field: 'exchanges'
-      }));*/
+							Manager.addWidget(new AjaxSolr.TreeMapWidget({
+								id: 'treemap_topics',
+								target: '#' + 'treemap_topics',
+								field: 'topics',
+								button1val: 'size',
+								button2val: 'count'
+							  }));
+							Manager.addWidget(new AjaxSolr.TreeMapWidget({
+								id: 'treemap_exchanges',
+								target: '#' + 'treemap_exchanges',
+								field: 'exchanges',
+								button1val: 'size2',
+								button2val: 'count2'
+							  }));
 	
 	/*
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({

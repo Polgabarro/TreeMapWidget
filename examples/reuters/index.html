@@ -37,8 +37,13 @@
 				  position: relative;
 				  width: 960px;
 				  height: 500px;
-				  left: 0px;
-				  top: 0px;
+				}
+				
+				#treemap_topics {
+				.body;
+				}
+				#treemap_exchanges {
+				.body;
 				}
 
 				form {
@@ -61,12 +66,19 @@
 
 
 	  <h2>Treemaps</h2>
-		  <div>
+		  <div id="treemap_topics">
 				<form>
 				  <label><input type="radio" name="mode" value="size" checked> Count</label>
 				  <label><input type="radio" name="mode" value="count"> Equal</label>
 				</form>
 		  </div>
+		  <div id="treemap_exchanges">
+				<form>
+				  <label><input type="radio" name="mode" value="size" checked> Count</label>
+				  <label><input type="radio" name="mode" value="count"> Equal</label>
+				</form>
+		  </div>
+		  
 		  
 		
 				

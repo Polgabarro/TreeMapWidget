@@ -9,6 +9,7 @@
 				return;
 			}else{
 				
+				
 				//objectedItems is my list of facets & counts
 				var maxCount = 0;
 				var objectedItems2 = [];
@@ -20,6 +21,7 @@
 				  objectedItems2.push({ name: facet, children : [{name: facet, size: count}] });
 				}
 				
+				
 				//see print values
 				/*for(var i=0; i<objectedItems2.length;i++){
 					document.write(objectedItems2[i].name); 
@@ -29,24 +31,27 @@
 				}*/
 				
 				var json1= JSON.stringify(objectedItems2);
+				//document.write(json1);
+				
 				var json2 = '{ "name" : "node" , "children" : ';
 				json2 += json1;
 				json2 += '}';
+				//document.write(json2); 
 				
 				
-				var margin = {
-				    top: 40, right: 10, bottom: 10, left: 10},
-				    width = 960 - margin.left - margin.right,
-				    height = 500 - margin.top - margin.bottom;
-
+				var margin = {top: 40, right: 10, bottom: 10, left: 10};
+				var width = 960 - margin.left - margin.right;
+				var  height = 500 - margin.top - margin.bottom;
+				
 				var color = d3.scale.category20c();
 
 				var treemap = d3.layout.treemap()
 				    .size([width, height])
 				    .sticky(true)
 				    .value(function(d) { return d.size; });
-
-				var div = d3.select("body").append("div")
+					
+				//style class to overwrite attrs = target 
+				var div = d3.select(this.target).append("div")
 				    .style("position", "relative")
 				    .style("width", (width + margin.left + margin.right) + "px")
 				    .style("height", (height + margin.top + margin.bottom) + "px")
@@ -64,7 +69,7 @@
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .text(function(d) { return d.children ? null : d.name; });
 					
-					//changing input button
+
 				  d3.selectAll("input").on("change", function change() {
 				    var value = this.value === "count"
 					? function() { return 1; }
