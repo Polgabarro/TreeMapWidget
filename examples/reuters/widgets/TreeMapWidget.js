@@ -92,17 +92,9 @@
 				  
 				});
 				
-				//when a tag in the tagcloud is pressed, change the bubbles
+				
 				//$(this.target).empty();
-				for (var i = 0, l = objectedItems2.length; i < l; i++) {
-				  var facet = objectedItems2[i].facet;
-				  $(this.target).append(
-					$('<a href="#" class="tagcloud_item"></a>')
-					.text(facet)
-					.addClass('tagcloud_size_' + parseInt(objectedItems2[i].count / maxCount * 10))
-					.click(this.clickHandler(facet))
-				  );
-				}
+				
 				  
 
 			 
