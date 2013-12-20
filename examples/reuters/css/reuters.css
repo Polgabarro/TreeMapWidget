@@ -6,10 +6,26 @@
 body {
   background: #fff url(../images/header.gif) repeat-x;
   color: #333;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 18px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+  height: 500px;
 }
+
+				
+				
+
+form {
+  position: relative;
+  right: 10px;
+  top: 10px;
+}
+
+				
+				
 img {
   border: none;
 }
@@ -110,51 +126,13 @@ a:hover {
 #search_help {
   font-size: 80%;
 }
-.tagcloud {
-  padding: 10px 15px 0;
-}
-.tagcloud_item {
-  float: left;
-  display: block;
-  margin-right: 4px;
-  color: #6998f0;
-}
-.tagcloud_item:hover {
-  color: #f00;
-}
 
-/* tagcloud */
-
-a.tagcloud_size_0 {
-font-size: 80%;
-}
-a.tagcloud_size_1 {
-font-size: 90%;
-}
-a.tagcloud_size_2 {
-font-size: 100%;
-}Rst
-a.tagcloud_size_3 {
-font-size: 110%;
-}
-a.tagcloud_size_4 {
-font-size: 120%;
-}
-a.tagcloud_size_5 {
-font-size: 130%;
-}
-a.tagcloud_size_6 {
-font-size: 140%;
-}
-a.tagcloud_size_7 {
-font-size: 150%
-}
-a.tagcloud_size_8 {
-font-size: 160%;
-}
-a.tagcloud_size_9 {
-font-size: 170%;
-}
-a.tagcloud_size_10 {
-font-size: 180%;
+/*TREEMAP NODE*/
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
 }

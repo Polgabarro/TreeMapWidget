@@ -13,16 +13,18 @@ var Manager;
 								id: 'treemap_topics',
 								target: '#' + 'treemap_topics',
 								field: 'topics',
-								button1val: 'size',
-								button2val: 'count'
+								width: 960,
+								height: 500,
+								margin: {top: 40,right: 10,bottom: 10,left: 10},
 							  }));
-							/*Manager.addWidget(new AjaxSolr.TreeMapWidget({
+							Manager.addWidget(new AjaxSolr.TreeMapWidget({
 								id: 'treemap_exchanges',
 								target: '#' + 'treemap_exchanges',
 								field: 'exchanges',
-								button1val: 'size2',
-								button2val: 'count2'
-							  }));*/
+								width: 960,
+								height: 500,
+								margin: {top: 40,right: 10,bottom: 10,left: 10}
+							  }));
 	
 	
     Manager.init();

@@ -23,12 +23,12 @@
 				
 				
 				//see print values
-				/*for(var i=0; i<objectedItems2.length;i++){
-					document.write(objectedItems2[i].name); 
-					document.write(",");
-					document.write(objectedItems2[i].children[0].size);
-					document.write("\n");
-				}*/
+					/*for(var i=0; i<objectedItems2.length;i++){
+						document.write(objectedItems2[i].name); 
+						document.write(",");
+						document.write(objectedItems2[i].children[0].size);
+						document.write("\n");
+					}*/
 				
 				var json1= JSON.stringify(objectedItems2);
 				//document.write(json1);
@@ -38,11 +38,11 @@
 				json2 += '}';
 				//document.write(json2); 
 				
+				var width = this.width;
+				var height = this.height;
+				var margin = this.margin;
 				
-				var margin = {top: 40, right: 10, bottom: 10, left: 10};
-				var width = 960 - margin.left - margin.right;
-				var  height = 500 - margin.top - margin.bottom;
-				
+
 				var color = d3.scale.category20c();
 
 				var treemap = d3.layout.treemap()
@@ -72,7 +72,7 @@
 
 				  d3.selectAll("input").on("change", function change() {
 				    var value = this.value === "count"
-					? function() { return 1; }
+					? function(d) { return 1; }
 					: function(d) { return d.size; };
 
 				    node
@@ -81,7 +81,10 @@
 					.duration(1500)
 					.call(position);
 				  });
+				  
+				  
 				});
+				
 
 				function position() {
 				  this.style("left", function(d) { return d.x + "px"; })
