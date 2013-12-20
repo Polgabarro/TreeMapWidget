@@ -4,9 +4,8 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
+      solrUrl: 'http://evolvingweb.ca/solr/reuters/'
     });
-
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
       target: '#docs'
@@ -21,12 +20,7 @@ var Manager;
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
-    
-	
-	
-	var fields = [ 'topics', 'organisations', 'exchanges' ];
-	
-	
+    var fields = [ 'topics', 'organisations', 'exchanges' ];
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.TagcloudWidget({
         id: fields[i],
@@ -43,58 +37,14 @@ var Manager;
       target: '#search',
       fields: [ 'topics', 'organisations', 'exchanges' ]
     }));
-    
-	
-	/*Manager.addWidget(new AjaxSolr.CountryCodeWidget({
-      id: 'countries',
-      target: '#countries',
-      field: 'countryCodes'
-    }));
-    Manager.addWidget(new AjaxSolr.CalendarWidget({
-      id: 'calendar',
-      target: '#calendar',
-      field: 'date'
-    }));*/
-
-	
-
-	
-	Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_topics',
-		target: '#' + 'treemap_topics',
-		field: 'topics',
-		width: 382,
-		height: 202,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
-	  }));
-	  
-	  /*Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_exchanges',
-		target: '#' + 'treemap_exchanges',
-		field: 'exchanges',
-		width: 960,
-		height: 500,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
-	  }));*/
-							
-							
-
-	
-	
-
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': [ 'topics', 'organisations', 'exchanges', 'countryCodes' ],
+      'facet.field': [ 'topics', 'organisations', 'exchanges' ],
       'facet.limit': 20,
       'facet.mincount': 1,
       'f.topics.facet.limit': 50,
-      'f.countryCodes.facet.limit': -1,
-      'facet.date': 'date',
-      'facet.date.start': '1987-02-26T00:00:00.000Z/DAY',
-      'facet.date.end': '1987-10-20T00:00:00.000Z/DAY+1DAY',
-      'facet.date.gap': '+1DAY',
       'json.nl': 'map'
     };
     for (var name in params) {
@@ -102,14 +52,5 @@ var Manager;
     }
     Manager.doRequest();
   });
-
-  $.fn.showIf = function (condition) {
-    if (condition) {
-      return this.show();
-    }
-    else {
-      return this.hide();
-    }
-  }
 
 })(jQuery);

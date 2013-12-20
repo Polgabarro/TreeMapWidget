@@ -3,11 +3,16 @@
 	AjaxSolr.TreeMapWidget = AjaxSolr.AbstractFacetWidget.extend({
 		afterRequest: function () 
 		{
-	                
+				//default values
+				var width= 960;
+				var height= 500;
+				var margin= {top: 40,right: 10,bottom: 10,left: 10};
+					
 			if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
 				$(this.target).html('no items found in current selection');
 				return;
-			}else{
+			}
+			
 				
 				
 				//objectedItems is my list of facets & counts
@@ -94,7 +99,7 @@
 				}
 				
 
-          		}
+          		
 		}
 	});
 

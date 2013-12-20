@@ -1,12 +1,32 @@
 var Manager;
 
+require.config({
+  paths: {
+    core: '../../../core',
+    managers: '../../../managers',
+    widgets: '../../../widgets',
+    reuters: '../widgets'
+  },
+  urlArgs: "bust=" +  (new Date()).getTime()
+});
+
 (function ($) {
 
+define([
+  'managers/Manager.jquery',
+  'core/ParameterStore',
+  'reuters/ResultWidget',
+  'reuters/TagcloudWidget',
+  'reuters/CurrentSearchWidget.9',
+  'reuters/AutocompleteWidget',
+  'reuters/CountryCodeWidget',
+  'reuters/CalendarWidget',
+  'widgets/jquery/PagerWidget'
+], function () {
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
+      solrUrl: 'http://evolvingweb.ca/solr/reuters/'
     });
-
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
       target: '#docs'
@@ -21,12 +41,7 @@ var Manager;
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
-    
-	
-	
-	var fields = [ 'topics', 'organisations', 'exchanges' ];
-	
-	
+    var fields = [ 'topics', 'organisations', 'exchanges' ];
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.TagcloudWidget({
         id: fields[i],
@@ -43,9 +58,7 @@ var Manager;
       target: '#search',
       fields: [ 'topics', 'organisations', 'exchanges' ]
     }));
-    
-	
-	/*Manager.addWidget(new AjaxSolr.CountryCodeWidget({
+    Manager.addWidget(new AjaxSolr.CountryCodeWidget({
       id: 'countries',
       target: '#countries',
       field: 'countryCodes'
@@ -54,34 +67,7 @@ var Manager;
       id: 'calendar',
       target: '#calendar',
       field: 'date'
-    }));*/
-
-	
-
-	
-	Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_topics',
-		target: '#' + 'treemap_topics',
-		field: 'topics',
-		width: 382,
-		height: 202,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
-	  }));
-	  
-	  /*Manager.addWidget(new AjaxSolr.TreeMapWidget({
-		id: 'treemap_exchanges',
-		target: '#' + 'treemap_exchanges',
-		field: 'exchanges',
-		width: 960,
-		height: 500,
-		margin: {top: 40,right: 10,bottom: 10,left: 10}
-	  }));*/
-							
-							
-
-	
-	
-
+    }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
@@ -111,5 +97,6 @@ var Manager;
       return this.hide();
     }
   }
+});
 
 })(jQuery);
