@@ -72,7 +72,8 @@
 				      .attr("class", "node")
 				      .call(position)
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
-				      .text(function(d) { return d.children ? null : d.name; });
+				      .text(function(d) { return d.children ? null : d.name; })
+					  .on("click", function(d) { document.write(d.name)});
 					
 
 				  d3.selectAll("input").on("change", function change() {
@@ -86,9 +87,23 @@
 					.duration(1500)
 					.call(position);
 				  });
-				  
+				 
+				 
 				  
 				});
+				
+				//when a tag in the tagcloud is pressed, change the bubbles
+				//$(this.target).empty();
+				for (var i = 0, l = objectedItems2.length; i < l; i++) {
+				  var facet = objectedItems2[i].facet;
+				  $(this.target).append(
+					$('<a href="#" class="tagcloud_item"></a>')
+					.text(facet)
+					.addClass('tagcloud_size_' + parseInt(objectedItems2[i].count / maxCount * 10))
+					.click(this.clickHandler(facet))
+				  );
+				}
+				  
 				
 
 				function position() {
