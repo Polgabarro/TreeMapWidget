@@ -3,6 +3,7 @@
 	AjaxSolr.TreeMapWidget = AjaxSolr.AbstractFacetWidget.extend({
 		afterRequest: function () 
 		{
+				$(this.target).empty();
 				//default values
 				var width= 960;
 				var height= 500;
