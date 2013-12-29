@@ -74,7 +74,7 @@
 				      .call(position)
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .text(function(d) { return d.children ? null : d.name; })
-					  .on("click", function(d) { document.write(d.name)}); //we need to call here the clickHandler(d.className)
+					  .on("click", function(d) { document.write(d.name)}); //we need to call here the "clickHandler(d.name)"
 					
 
 				  d3.selectAll("input").on("change", function change() {
