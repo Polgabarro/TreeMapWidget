@@ -1,6 +1,8 @@
 (function ($) {
         
 	AjaxSolr.TreeMapWidget = AjaxSolr.AbstractFacetWidget.extend({
+		
+				  
 		afterRequest: function () 
 		{
 				$(this.target).empty();
@@ -8,7 +10,10 @@
 				var width= 960;
 				var height= 500;
 				var margin= {top: 40,right: 10,bottom: 10,left: 10};
-					
+				var env = this;
+				
+				
+		  
 			if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
 				$(this.target).html('no items found in current selection');
 				return;
@@ -63,7 +68,9 @@
 				    .style("height", (height + margin.top + margin.bottom) + "px")
 				    .style("left", margin.left + "px")
 				    .style("top", margin.top + "px");
+					
 				
+	
 				//"" is the path of the json, if gives error, it would use the root value
 				d3.json("", function(error, root) {
 					root=JSON.parse( json2 );
@@ -74,9 +81,12 @@
 				      .call(position)
 				      .style("background", function(d) { return d.children ? color(d.name) : null; })
 				      .text(function(d) { return d.children ? null : d.name; })
-					  .on("click", function(d) { document.write(d.name)}); //we need to call here the "clickHandler(d.name)"
-					
-
+					  .on("click", function(d) { //clickhandler function
+						  var self = env, meth = env.multivalue ? 'add' : 'set';			
+							self[meth].call(self, d.name);
+							self.doRequest();
+					  }); 
+						  
 				  d3.selectAll("input").on("change", function change() {
 				    var value = this.value === "count"
 					? function(d) { return 1; }
@@ -92,13 +102,7 @@
 				 
 				  
 				});
-				
-				
-				//$(this.target).empty();
-				
-				  
 
-			 
 				function position() {
 				  this.style("left", function(d) { return d.x + "px"; })
 				      .style("top", function(d) { return d.y + "px"; })
@@ -106,7 +110,6 @@
 				      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 				}
 				
-
           		
 		}
 	});
